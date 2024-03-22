@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiChallenge.Views.ItemsPage"
+             BackgroundColor="#F1F1F1"
+             Title="Items">
+    <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                 Command="{Binding RefreshCommand}">
+        <Grid>
+            <Label Text="GET" 
+                   Opacity="0.1"
+                   FontSize="80"
+                   HorizontalOptions="Start" 
+                   VerticalOptions="End" />
+            <CollectionView Grid.Row="10"
+                            x:Name="xitemcollection"
+                            ItemsSource="{Binding Items}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <Border StrokeShape="RoundRectangle 12" 
+                                    Stroke="White"
+                                    Margin="4"
+                                    BackgroundColor="White"
+                                    HeightRequest="80">
+                                <Label Text="{Binding name}"
+                                       Margin="10,0"
+                                       FontAttributes="Bold"
+                                       VerticalOptions="Center" />
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectedCommand, Source={x:Reference xitemcollection}}" CommandParameter="{Binding .}" />
+
+                                </Border.GestureRecognizers>
+                            </Border>
+                            <SwipeView.RightItems>
+                                <SwipeItemView  Command="{Binding BindingContext.DeleteItemCommand, Source={x:Reference xitemcollection}}" CommandParameter="{Binding .}">
+                                    <Grid BackgroundColor="Red" WidthRequest="80">
+                                        <Label Text="Eliminar" 
+                                               FontFamily="OpenSansSemibold"
+                                               HorizontalOptions="Center"
+                                               VerticalOptions="Center"
+                                               TextColor="White" />
+                                    </Grid>
+                                </SwipeItemView>
+                                
+                            </SwipeView.RightItems>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="+"
+                    Command="{Binding AddNewItemCommand}"
+                    CornerRadius="12"
+                    Margin="20"
+                    FontSize="Medium"
+                    TextColor="White"
+                    BackgroundColor="Black"
+                    HorizontalOptions="End" 
+                    VerticalOptions="End">
+                
+            </Button>
+           
+        </Grid>
+    </RefreshView>
+</ContentPage>

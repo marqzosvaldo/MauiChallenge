@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiChallenge.Views.ItemDetailsPage"
+             Title="Item Details">
+    <Grid>
+        <Label Text="PUT" 
+               Opacity="0.1"
+               FontSize="80"
+               HorizontalOptions="Start" 
+               VerticalOptions="End" />
+        <VerticalStackLayout Grid.Row="0" Margin="0,40">
+            <Entry Text="{Binding Item.name}"
+            TextChanged="Entry_TextChanged"
+            Margin="20,0" />
+
+            <Button Text="Guardar"
+             
+             IsEnabled="{Binding IsButtonEnable, Mode=TwoWay}"
+             Command="{Binding SaveItemCommand}"
+             Margin="20,0" />
+        </VerticalStackLayout>
+
+    </Grid>
+   
+</ContentPage>
